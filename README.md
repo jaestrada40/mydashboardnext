@@ -14,23 +14,104 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npx create-next-app <nombre_de_la_app>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#Para crear la estructura de una pagina
+#comando
+prc
+# export default function NamePage() {
+#   return (
+#     <div>
+#       <h1>Hello Page</h1>
+#     </div>
+#   );
+# }
 
-## Learn More
+#Para crear metadata
+#comando
+mr
 
-To learn more about Next.js, take a look at the following resources:
+# export const metadata = {
+#  title: 'SEO Title',
+#  description: 'SEO Title',
+# };
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#Para crear un layout
+#comando
+lrc
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# export default function Root NameLayout({
+#  children
+# }: {
+#  children: React.ReactNode;
+# }) {
+#   return (
+#     <div>
+#       <h1>Hello Root Layout Root Name</h1>
+#     </div>
+#   );
+# }
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Comando
+rafc
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# import React from 'react'
+
+# export const layout = () => {
+#   return (
+#     <div>layout</div>
+#   )
+# }
+
+
+
+# Dashboard
+https://www.creative-tim.com/twcomponents/component/dashboard-navigation
+
+# Para configurar las imagenes
+# en next.config.mjs hay que agregar esto
+
+    # images: {
+    #     remotePatterns:[
+    #         {
+    #             protocol: 'https',
+    #             hostname: 'images.unsplash.com',
+    #         },
+    #     ]
+    # }
+
+# En el tsx
+
+        #  <span>
+        #      <Image className="rounded-full w-8 h-8" src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c" 
+        #         alt="Avatar" 
+        #         width={50} 
+        #         height={50} />
+        #  </span>
+
+
+# Instalar React Icons
+npm install react-icons --save
+
+# Formatear código
+Shift -> Alt -> F
+
+# Esto es para saber en que pagina esta queda marcado
+const currentPath = usePathname();
+
+        <Link href={path} className={`
+                w-full px-2 inline-flex space-x-2 items-center border-b border-slate-700 py-3  hover:bg-white/5 transition ease-linear duration-150
+                ${ currentPath === path ? 'bg-blue-800': ''}
+                `}>
+            <div>
+                {icon}
+            </div>
+            <div className="flex flex-col">
+                <span className="text-lg font-bold leading-5 text-white">{title}</span>
+                <span className="text-sm text-white/50 hidden md:block">{subTitle}</span>
+            </div>
+        </Link>
+```
