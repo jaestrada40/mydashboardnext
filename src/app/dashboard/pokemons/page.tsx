@@ -1,8 +1,3 @@
-
-import Image from 'next/image';
-
-import { error } from "console";
-import { notFound } from "next/navigation";
 import { SimplePokemon } from '@/pokemons/interfaces/simple-pokemon';
 import { PokemonsResponse } from '@/pokemons/interfaces/pokemons-response';
 import { PokemonGrid } from '@/pokemons/components/PokemonGrid';

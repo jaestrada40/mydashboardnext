@@ -1,6 +1,7 @@
 import { Pokemon } from "@/pokemons/interfaces/pokemon";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 
 
@@ -13,25 +14,44 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata>{
 
+  try {
     const { id, name } = await getPokemon( params.id );
-
+    
+      return{
+          title: `#${ id } - ${ name }`,
+          description: `Página del pokémon ${ name }`
+      }
+    
+  } catch (error) {
     return{
-        title: `#${ id } - ${ name }`,
-        description: `Página del pokémon ${ name }`
+      title: 'Página del pokémon',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat repudiandae vitae quis cum ullam incidunt rerum praesentium? Ducimus deleniti assumenda consequatur dolorem neque, repudiandae suscipit voluptatem dolor saepe optio. Culpa.'
     }
+  }
+
 }
 
 const getPokemon = async ( id: string ): Promise<Pokemon> => {
+
+
+  try {
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${ id }`,{
         cache: 'force-cache'// TODO: cambiar esto en un futuro
         // next:{
         //     revalidate: 60
         // }
     }). then( resp => resp.json() );
-
+  
     console.log(pokemon.name );
     
     return pokemon;
+    
+  } catch (error) {
+
+      notFound();
+
+  }
+
 }
 
 export default async function PokemonPage({ params }: Props) {
@@ -52,6 +72,7 @@ export default async function PokemonPage({ params }: Props) {
                 width={150}
                 height={150}
                 alt={`Imagen del pokemon ${pokemon.name}`}
+                style={{ width: 'auto', height: 'auto' }}
                 className="mb-5"
               />
   
